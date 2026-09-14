@@ -117,7 +117,7 @@
     }
 
     .logo img {
-        max-height: 90px;
+        max-height: 123px;
         width: auto;
         border-radius: 8px;
         transition: transform 0.3s ease;
@@ -162,21 +162,21 @@
        HAMBURGER
     ========================================================= */
 
-    #menu-toggle {
-        display: none;
+#menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 28px;
+    position: absolute;
+    right: 20px; /* distância da direita */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1100;
+}
 
-        background: transparent;
-        border: none;
 
-        cursor: pointer;
-
-        width: 32px;
-        height: 28px;
-
-        position: relative;
-
-        z-index: 1100;
-    }
 
     .hamburger,
     .hamburger::before,
@@ -1454,136 +1454,7 @@
         max-width: 100%;
     }
 
-/* =========================================================
-   ESCOLHA DA LOGO
-========================================================= */
 
-.escolha-logo {
-    width: 100%;
-    max-width: 1150px;
-    margin: 0 auto;
-    padding: 70px 25px;
-    text-align: center;
-}
-
-.escolha-logo h2 {
-    color: var(--texto);
-    font-size: clamp(2rem, 4vw, 2.7rem);
-    margin-bottom: 15px;
-}
-
-.escolha-logo > p {
-    max-width: 800px;
-    margin: 0 auto 40px;
-    color: var(--cinza);
-    line-height: 1.8;
-}
-
-.logos-opcoes {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    max-width: 950px;
-    margin: 0 auto;
-}
-
-.logo-opcao {
-    background: var(--preto-3);
-    padding: 25px;
-    border-radius: 15px;
-    border-left: 8px solid var(--amarelo);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    transition: 0.3s ease;
-}
-
-.logo-opcao:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-}
-
-.logo-preview {
-    width: 100%;
-    height: 280px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #ffffff;
-    border-radius: 10px;
-
-    padding: 25px;
-    margin-bottom: 20px;
-
-    overflow: hidden;
-}
-
-.logo-preview img {
-    max-width: 100%;
-    max-height: 230px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-}
-
-.logo-opcao h3 {
-    color: #ffffff;
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-}
-
-.logo-opcao p {
-    color: #dddddd;
-    font-size: 0.95rem;
-}
-
-
-/* =========================================================
-   LOGOS - CELULAR
-========================================================= */
-
-@media (max-width: 768px) {
-
-    .escolha-logo {
-        padding: 50px 20px;
-    }
-
-    .logos-opcoes {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        width: 100%;
-    }
-
-    .logo-opcao {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .logo-preview {
-        height: 240px;
-    }
-
-    .logo-preview img {
-        max-height: 200px;
-    }
-}
-
-::-webkit-scrollbar {
-    width: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: #111;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #F4C430;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #ffd83d;
-}
 </style>
 </head>
 
@@ -1600,7 +1471,7 @@
     <div class="logo">
         <a href="index.html">
             <img
-                src="imagens/logo.png"
+                src="imagens/nova logo.png"
                 alt="Logo Projeto Recomeçar"
             >
         </a>
@@ -1795,45 +1666,6 @@
 </section>
 
 
-<section class="escolha-logo" id="escolha-logo">
-
-    <h2>Escolha o modelo da nossa logo</h2>
-
-    <p>
-        Preparamos duas opções de identidade visual para o projeto.
-        Confira os modelos abaixo e escolha o que mais representa a nossa instituição.
-    </p>
-
-    <div class="logos-opcoes">
-
-        <div class="logo-opcao">
-            <div class="logo-preview">
-                <img src="imagens/nova logo.png" alt="Modelo 1 da logo">
-            </div>
-
-            <h3>Modelo 1</h3>
-
-            <p>
-                Primeira opção de identidade visual.
-            </p>
-        </div>
-
-
-        <div class="logo-opcao">
-            <div class="logo-preview">
-                <img src="imagens/teste2.png" alt="Modelo 2 da logo">
-            </div>
-
-            <h3>Modelo 2</h3>
-
-            <p>
-                Segunda opção de identidade visual.
-            </p>
-        </div>
-
-    </div>
-
-</section>
 
 <!-- =========================================================
      SOBRE

@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contatos | C.T. Inspire</title>
+
+    <link rel="icon" href="imagens/favicon.jpg" type="image/jpeg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        :root {
+            --preto: #000000;
+            --preto-2: #111111;
+            --preto-3: #1a1a1a;
+            --amarelo: #F4C430;
+            --amarelo-hover: #D9A900;
+            --branco: #ffffff;
+            --cinza: #666666;
+            --cinza-claro: #f5f5f5;
+            --fundo: #ffffff;
+            --texto: #111111;
+            --borda: #e5e5e5;
+            --sombra: rgba(0, 0, 0, 0.10);
+        }
+
+        html[data-theme="dark"] {
+            --fundo: #0d0d0d;
+            --texto: #ffffff;
+            --cinza-claro: #151515;
+            --cinza: #bbbbbb;
+            --borda: #2c2c2c;
+            --sombra: rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--amarelo) var(--preto-2);
+        }
+
+        body {
+            font-family: "Oxanium", sans-serif;
+            background: var(--fundo);
+            color: var(--texto);
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: var(--preto-2);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: var(--amarelo);
+            border-radius: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            width: 100%;
+            height: 82px;
+            background: var(--preto);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--amarelo);
+        }
+
+        .logo img {
+            width: auto;
+            max-height: 70px;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--branco);
+            font-size: 15px;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: var(--amarelo);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a[aria-current="page"] {
+            color: var(--amarelo);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        #menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 34px;
+            height: 30px;
+            position: relative;
+            z-index: 1100;
+        }
+
+        .hamburger,
+        .hamburger::before,
+        .hamburger::after {
+            content: "";
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--amarelo);
+            border-radius: 3px;
+            position: absolute;
+            left: 3px;
+            transition: 0.3s ease;
+        }
+
+        .hamburger {
+            top: 13px;
+        }
+
+        .hamburger::before {
+            top: -9px;
+            left: 0;
+        }
+
+        .hamburger::after {
+            top: 9px;
+            left: 0;
+        }
+
+        /* ================= BOTÃO TEMA ================= */
+
+        #theme-toggle {
+            position: fixed;
+            right: 22px;
+            bottom: 85px;
+            width: 43px;
+            height: 43px;
+            border: 1px solid var(--amarelo);
+            border-radius: 50%;
+            background: var(--preto);
+            color: var(--amarelo);
+            cursor: pointer;
+            z-index: 900;
+            font-size: 17px;
+            transition: 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            background: var(--amarelo);
+            color: var(--preto);
+            transform: rotate(20deg);
+        }
+
+        /* ================= HERO ================= */
+
+        .contato-hero {
+            min-height: 330px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 70px 20px;
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.78),
+                    rgba(0, 0, 0, 0.78)
+                ),
+                url("imagens/banner-contato.jpg") center/cover no-repeat;
+            border-bottom: 3px solid var(--amarelo);
+        }
+
+        .contato-hero-content {
+            max-width: 850px;
+        }
+
+        .contato-hero h1 {
+            color: var(--amarelo);
+            font-size: clamp(35px, 5vw, 64px);
+            line-height: 1.1;
+            margin-bottom: 18px;
+            font-weight: 800;
+        }
+
+        .contato-hero p {
+            color: #eeeeee;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        /* ================= TÍTULOS ================= */
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            color: var(--texto);
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .section-title h2 span {
+            color: var(--amarelo-hover);
+        }
+
+        .section-title p {
+            max-width: 650px;
+            margin: auto;
+            color: var(--cinza);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ================= CARDS DE CONTATO ================= */
+
+        .contato-cards-section {
+            padding: 75px 6%;
+            background: var(--fundo);
+        }
+
+        .contato-cards {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .contato-card {
+            background: var(--cinza-claro);
+            border: 1px solid var(--borda);
+            border-top: 4px solid var(--amarelo);
+            border-radius: 10px;
+            padding: 30px 22px;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .contato-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px var(--sombra);
+            border-color: var(--amarelo);
+        }
+
+        .contato-card .icone {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--amarelo);
+            color: var(--preto);
+            border-radius: 50%;
+            font-size: 25px;
+        }
+
+        .contato-card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+            color: var(--texto);
+        }
+
+        .contato-card p {
+            color: var(--cinza);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .contato-card a {
+            color: var(--amarelo-hover);
+            font-weight: 700;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        .contato-card a:hover {
+            color: var(--texto);
+        }
+
+        /* ================= FORMULÁRIO E MAPA ================= */
+
+        .contato-area-section {
+            padding: 75px 6%;
+            background: var(--cinza-claro);
+        }
+
+        .contato-area {
+            max-width: 1250px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        .formulario-box,
+        .mapa-box {
+            background: var(--fundo);
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 8px 25px var(--sombra);
+        }
+
+        .box-title {
+            margin-bottom: 25px;
+        }
+
+        .box-title h3 {
+            font-size: 27px;
+            margin-bottom: 10px;
+            color: var(--texto);
+        }
+
+        .box-title h3 span {
+            color: var(--amarelo-hover);
+        }
+
+        .box-title p {
+            color: var(--cinza);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: var(--texto);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .form-group label span {
+            color: #d00000;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            border: 1px solid var(--borda);
+            background: var(--cinza-claro);
+            color: var(--texto);
+            padding: 14px 15px;
+            border-radius: 6px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--amarelo);
+            box-shadow: 0 0 0 3px rgba(244, 196, 48, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 145px;
+            resize: vertical;
+        }
+
+        .consentimento {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 20px;
+            color: var(--cinza);
+            font-size: 12px;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .consentimento input {
+            margin-top: 3px;
+            accent-color: var(--amarelo);
+        }
+
+        .btn-enviar {
+            margin-top: 25px;
+            border: none;
+            background: var(--amarelo);
+            color: var(--preto);
+            padding: 15px 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s ease;
+        }
+
+        .btn-enviar:hover {
+            background: var(--amarelo-hover);
+            transform: translateY(-2px);
+        }
+
+        .form-aviso {
+            margin-top: 18px;
+            padding: 12px 15px;
+            border-left: 3px solid var(--amarelo);
+            background: var(--cinza-claro);
+            color: var(--cinza);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* ================= MAPA ================= */
+
+        .mapa-container {
+            width: 100%;
+            height: 330px;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--borda);
+            margin-bottom: 20px;
+        }
+
+        .mapa-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .endereco-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .endereco-info i {
+            color: var(--amarelo-hover);
+            font-size: 20px;
+            margin-top: 3px;
+        }
+
+        .endereco-info h4 {
+            color: var(--texto);
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .endereco-info p {
+            color: var(--cinza);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .btn-mapa {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--preto);
+            color: var(--amarelo);
+            padding: 13px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .btn-mapa:hover {
+            background: var(--amarelo);
+            color: var(--preto);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: var(--preto);
+            color: var(--branco);
+            padding: 55px 6% 20px;
+            border-top: 3px solid var(--amarelo);
+        }
+
+        .footer-content {
+            max-width: 1250px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 45px;
+            padding-bottom: 35px;
+        }
+
+        .footer-logo img {
+            max-width: 210px;
+            max-height: 90px;
+            object-fit: contain;
+            margin-bottom: 18px;
+        }
+
+        .footer-col p {
+            color: #bbbbbb;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .footer-col h3 {
+            color: var(--amarelo);
+            margin-bottom: 18px;
+            font-size: 20px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 13px;
+            color: #cccccc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .footer-contact-item i {
+            color: var(--amarelo);
+            width: 17px;
+            margin-top: 3px;
+        }
+
+        .footer-contact-item a:hover {
+            color: var(--amarelo);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--amarelo);
+            color: var(--amarelo);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--amarelo);
+            color: var(--preto);
+        }
+
+        .footer-bottom {
+            max-width: 1250px;
+            margin: auto;
+            border-top: 1px solid #333333;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            color: #999999;
+            font-size: 12px;
+        }
+
+        .footer-development {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-development img {
+            width: 85px;
+            max-height: 30px;
+            object-fit: contain;
+        }
+
+        /* ================= WHATSAPP ================= */
+
+        .whatsapp-button {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            z-index: 950;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+            transition: 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.08);
+        }
+
+        /* ================= RESPONSIVO ================= */
+
+        @media (max-width: 1050px) {
+            .contato-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-col:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: 75px;
+                padding: 0 5%;
+            }
+
+            .logo img {
+                max-height: 58px;
+            }
+
+            #menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 75px;
+                right: -100%;
+                width: 260px;
+                min-height: calc(100vh - 75px);
+                background: var(--preto);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                padding: 30px 25px;
+                border-left: 2px solid var(--amarelo);
+                transition: right 0.3s ease;
+            }
+
+            nav ul.show {
+                right: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                border-bottom: 1px solid #292929;
+            }
+
+            nav ul li a {
+                display: block;
+                width: 100%;
+                padding: 17px 0;
+            }
+
+            nav ul li a::after {
+                display: none;
+            }
+
+            .contato-hero {
+                min-height: 300px;
+                padding: 55px 20px;
+            }
+
+            .contato-hero h1 {
+                font-size: 38px;
+            }
+
+            .contato-hero p {
+                font-size: 15px;
+            }
+
+            .contato-cards-section,
+            .contato-area-section {
+                padding: 55px 5%;
+            }
+
+            .contato-cards {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .contato-area {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .formulario-box,
+            .mapa-box {
+                padding: 25px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-col:first-child {
+                grid-column: auto;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            #theme-toggle {
+                right: 18px;
+                bottom: 85px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .whatsapp-button {
+                right: 18px;
+                bottom: 18px;
+                width: 49px;
+                height: 49px;
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .contato-hero h1 {
+                font-size: 32px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .box-title h3 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img
+                    src="imagens/nova logo.png"
+                    alt="Logo C.T. Inspire"
+                >
+            </a>
+        </div>
+
+        <button
+            id="menu-toggle"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+        >
+            <span class="hamburger"></span>
+        </button>
+
+        <nav>
+            <ul id="nav-menu">
+
+                <li>
+                    <a href="index.html">Início</a>
+                </li>
+
+                <li>
+                    <a href="sobre.html">Sobre</a>
+                </li>
+
+                <li>
+                    <a
+                        href="contatos.html"
+                        aria-current="page"
+                    >
+                        Contatos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="doacao.html">Doação</a>
+                </li>
+
+                <li>
+                    <a href="atendimento.html">Atendimento</a>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ================= CONTEÚDO PRINCIPAL ================= -->
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="contato-hero">
+
+            <div class="contato-hero-content">
+
+                <h1>Entre em contato</h1>
+
+                <p>
+                    Estamos à disposição para esclarecer dúvidas,
+                    conversar sobre parcerias, voluntariado, doações
+                    e outras formas de contribuir com o nosso projeto.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- CARDS DE CONTATO -->
+
+        <section class="contato-cards-section">
+
+            <div class="section-title">
+
+                <h2>
+                    Fale com a nossa <span>equipe</span>
+                </h2>
+
+                <p>
+                    Escolha uma das opções abaixo ou utilize o formulário
+                    para enviar sua mensagem diretamente para a organização.
+                </p>
+
+            </div>
+
+            <div class="contato-cards">
+
+                <div class="contato-card">
+
+                    <div class="icone">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+
+                    <h3>Fale pelo WhatsApp</h3>
+
+                    <p>
+                        Entre em contato rapidamente pelo WhatsApp
+                        para tirar dúvidas e obter informações.
+                    </p>
+
+                    <a
+                        href="https://wa.me/5511995637530"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Conversar pelo WhatsApp
+                    </a>
+
+                </div>
+
+                <div class="contato-card">
+
+                    <div class="icone">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <h3>Envie um e-mail</h3>
+
+                    <p>
+                        Envie uma mensagem formal para nossa equipe
+                        através do endereço oficial da organização.
+                    </p>
+
+                    <a href="mailto:projetorecomecar@gmail.com">
+                        projetorecomecar@gmail.com
+                    </a>
+
+                </div>
+
+                <div class="contato-card">
+
+                    <div class="icone">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <h3>Visite nosso espaço</h3>
+
+                    <p>
+                        Consulte a localização do projeto e veja como
+                        chegar até o nosso espaço.
+                    </p>
+
+                    <a
+                        href="https://maps.app.goo.gl/Exr3uMZ2TDyXwkyV6"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Ver localização
+                    </a>
+
+                </div>
+
+                <div class="contato-card">
+
+                    <div class="icone">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+
+                    <h3>Siga nosso trabalho</h3>
+
+                    <p>
+                        Acompanhe nossas ações, novidades, projetos
+                        e atividades pelas redes sociais.
+                    </p>
+
+                    <a
+                        href="https://www.instagram.com/inspire.ct/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        @inspire.ct
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FORMULÁRIO E MAPA -->
+
+        <section class="contato-area-section">
+
+            <div class="section-title">
+
+                <h2>
+                    Envie uma <span>mensagem</span>
+                </h2>
+
+                <p>
+                    Preencha o formulário abaixo e envie sua mensagem
+                    diretamente para o e-mail da organização.
+                </p>
+
+            </div>
+
+            <div class="contato-area">
+
+                <!-- FORMULÁRIO -->
+
+                <div class="formulario-box">
+
+                    <div class="box-title">
+
+                        <h3>
+                            Fale com a <span>equipe</span>
+                        </h3>
+
+                        <p>
+                            Utilize este espaço para tirar dúvidas,
+                            solicitar informações, propor parcerias,
+                            falar sobre doações ou outras formas de apoio.
+                        </p>
+
+                    </div>
+
+                    <form
+                        action="https://formsubmit.co/projetorecomecar@gmail.com"
+                        method="POST"
+                    >
+
+                        <!-- CONFIGURAÇÕES DO FORMSUBMIT -->
+
+                        <input
+                            type="hidden"
+                            name="_subject"
+                            value="Novo contato recebido pelo site"
+                        >
+
+                        <input
+                            type="hidden"
+                            name="_captcha"
+                            value="false"
+                        >
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="nome">
+                                    Nome completo <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nome"
+                                    name="Nome"
+                                    placeholder="Digite seu nome"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="email">
+                                    E-mail <span>*</span>
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="E-mail"
+                                    placeholder="seuemail@exemplo.com"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="telefone">
+                                    Telefone/WhatsApp
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="telefone"
+                                    name="Telefone"
+                                    placeholder="(11) 99999-9999"
+                                >
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="assunto">
+                                    Assunto <span>*</span>
+                                </label>
+
+                                <select
+                                    id="assunto"
+                                    name="Assunto"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Selecione um assunto
+                                    </option>
+
+                                    <option value="Dúvidas sobre o projeto">
+                                        Dúvidas sobre o projeto
+                                    </option>
+
+                                    <option value="Informações gerais">
+                                        Informações gerais
+                                    </option>
+
+                                    <option value="Doações">
+                                        Doações
+                                    </option>
+
+                                    <option value="Voluntariado">
+                                        Voluntariado
+                                    </option>
+
+                                    <option value="Parcerias">
+                                        Parcerias
+                                    </option>
+
+                                    <option value="Apoio ou colaboração">
+                                        Apoio ou colaboração
+                                    </option>
+
+                                    <option value="Imprensa e divulgação">
+                                        Imprensa e divulgação
+                                    </option>
+
+                                    <option value="Outros assuntos">
+                                        Outros assuntos
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group full">
+
+                                <label for="mensagem">
+                                    Mensagem <span>*</span>
+                                </label>
+
+                                <textarea
+                                    id="mensagem"
+                                    name="Mensagem"
+                                    placeholder="Digite aqui sua mensagem..."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+                        </div>
+
+                        <label class="consentimento">
+
+                            <input
+                                type="checkbox"
+                                name="Consentimento"
+                                value="Aceito"
+                                required
+                            >
+
+                            <span>
+                                Autorizo o uso das informações fornecidas
+                                exclusivamente para que a equipe possa
+                                responder ao meu contato.
+                            </span>
+
+                        </label>
+
+                        <button
+                            type="submit"
+                            class="btn-enviar"
+                        >
+                            <i class="fa-solid fa-paper-plane"></i>
+                            Enviar mensagem
+                        </button>
+
+                        <div class="form-aviso">
+                            Sua mensagem será encaminhada diretamente
+                            para o e-mail oficial da organização.
+                            Nossa equipe responderá assim que possível.
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <!-- MAPA -->
+
+                <div class="mapa-box">
+
+                    <div class="box-title">
+
+                        <h3>Onde estamos</h3>
+
+                        <p>
+                            Confira a localização do nosso espaço
+                            em São Paulo.
+                        </p>
+
+                    </div>
+
+                    <div class="mapa-container">
+
+                        <iframe
+                            src="https://www.google.com/maps?q=Rua+Joelma,+151,+Jardim+Oriental,+Parelheiros,+São+Paulo+-+SP&output=embed"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen
+                        ></iframe>
+
+                    </div>
+
+                    <div class="endereco-info">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <div>
+
+                            <h4>Endereço</h4>
+
+                            <p>
+                                Rua Joelma, 151<br>
+                                Jardim Oriental (Parelheiros)<br>
+                                São Paulo - SP
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <a
+                        class="btn-mapa"
+                        href="https://maps.app.goo.gl/Exr3uMZ2TDyXwkyV6"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        Abrir no Google Maps
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-col">
+
+                <div class="footer-logo">
+
+                    <img
+                        src="imagens/logo.png"
+                        alt="Logo C.T. Inspire"
+                    >
+
+                </div>
+
+                <p>
+                    Um espaço de acolhimento, desenvolvimento e
+                    transformação, dedicado à construção de novas
+                    oportunidades e caminhos para mulheres.
+                </p>
+
+                <div class="footer-social">
+
+                    <a
+                        href="https://www.instagram.com/inspire.ct/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                    >
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a
+                        href="https://wa.me/5511995637530"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="WhatsApp"
+                    >
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                    <a
+                        href="mailto:projetorecomecar@gmail.com"
+                        aria-label="E-mail"
+                    >
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h3>Contato</h3>
+
+                <div class="footer-contact-item">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+                        Rua Joelma, 151<br>
+                        Jardim Oriental (Parelheiros)<br>
+                        São Paulo - SP
+                    </span>
+
+                </div>
+
+                <div class="footer-contact-item">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <a href="tel:+5511995637530">
+                        (11) 99563-7530
+                    </a>
+
+                </div>
+
+                <div class="footer-contact-item">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <a href="mailto:projetorecomecar@gmail.com">
+                        projetorecomecar@gmail.com
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h3>Links rápidos</h3>
+
+                <div class="footer-contact-item">
+
+                    <i class="fa-solid fa-angle-right"></i>
+
+                    <a href="index.html">
+                        Início
+                    </a>
+
+                </div>
+
+                <div class="footer-contact-item">
+
+                    <i class="fa-solid fa-angle-right"></i>
+
+                    <a href="sobre.html">
+                        Quem somos
+                    </a>
+
+                </div>
+
+                <div class="footer-contact-item">
+
+                    <i class="fa-solid fa-angle-right"></i>
+
+                    <a href="doacao.html">
+                        Faça uma doação
+                    </a>
+
+                </div>
+
+                <div class="footer-contact-item">
+
+                    <i class="fa-solid fa-angle-right"></i>
+
+                    <a href="atendimento.html">
+                        Atendimento
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 C.T. Inspire. Todos os direitos reservados.
+            </span>
+
+            <div class="footer-development">
+
+                <span>Desenvolvido por</span>
+
+                <a
+                    href="https://genialassessoria.com.br"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <img
+                        src="imagens/logo-genial-branca-final.png"
+                        alt="Genial Assessoria"
+                    >
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- ================= BOTÃO TEMA ================= -->
+
+    <button
+        id="theme-toggle"
+        aria-label="Alternar tema"
+        title="Alternar tema"
+    >
+        <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <!-- ================= WHATSAPP ================= -->
+
+    <a
+        class="whatsapp-button"
+        href="https://wa.me/5511995637530"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Falar pelo WhatsApp"
+    >
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+        // ================= TEMA CLARO/ESCURO =================
+
+        const themeToggle = document.getElementById("theme-toggle");
+        const themeIcon = themeToggle.querySelector("i");
+
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+            document.documentElement.setAttribute(
+                "data-theme",
+                "dark"
+            );
+
+            themeIcon.classList.remove("fa-moon");
+            themeIcon.classList.add("fa-sun");
+        }
+
+        themeToggle.addEventListener("click", () => {
+
+            const currentTheme =
+                document.documentElement.getAttribute("data-theme");
+
+            if (currentTheme === "dark") {
+
+                document.documentElement.removeAttribute("data-theme");
+
+                localStorage.setItem("theme", "light");
+
+                themeIcon.classList.remove("fa-sun");
+                themeIcon.classList.add("fa-moon");
+
+            } else {
+
+                document.documentElement.setAttribute(
+                    "data-theme",
+                    "dark"
+                );
+
+                localStorage.setItem("theme", "dark");
+
+                themeIcon.classList.remove("fa-moon");
+                themeIcon.classList.add("fa-sun");
+
+            }
+
+        });
+
+        // ================= MENU MOBILE =================
+
+        const menuToggle = document.getElementById("menu-toggle");
+        const navMenu = document.getElementById("nav-menu");
+
+        menuToggle.addEventListener("click", (event) => {
+
+            event.stopPropagation();
+
+            navMenu.classList.toggle("show");
+
+            const isOpen = navMenu.classList.contains("show");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+        // Fecha o menu ao clicar em um link
+
+        document.querySelectorAll("#nav-menu a").forEach((link) => {
+
+            link.addEventListener("click", () => {
+
+                navMenu.classList.remove("show");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            });
+
+        });
+
+        // Fecha o menu ao clicar fora
+
+        document.addEventListener("click", (event) => {
+
+            if (
+                !navMenu.contains(event.target) &&
+                !menuToggle.contains(event.target)
+            ) {
+
+                navMenu.classList.remove("show");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        });
+    </script>
+
+</body>
+</html>
